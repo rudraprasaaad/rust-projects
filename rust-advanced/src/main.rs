@@ -1,3 +1,9 @@
+struct User {
+    active: bool,
+    username: String,
+    email: String,
+    sign_in_count: u64,
+}
 fn main() {
     let num: i32 = 32;
     print_num(num);
@@ -19,6 +25,16 @@ fn main() {
     let my_string2 = my_string.clone();
     println!("{}", my_string2);
     takes_ownership(my_string);
+    borrow();
+
+    let user1 = User {
+        active: true,
+        username: String::from("hey@gmail.com"),
+        email: String::from("hey@gmail.com"),
+        sign_in_count: 1,
+    };
+
+    print!("User 1 username: {:?}", user1.username);
 }
 
 fn print_num(num: i32) {
@@ -67,4 +83,20 @@ fn takes_ownership(some_string: String) {
 
 fn sum(a: i32, b: i32) -> i32 {
     return a + b;
+}
+
+fn borrow() {
+    let s1 = String::from("Hello");
+    let s2 = &s1;
+
+    println!("{}", s2);
+    println!("{}", s1);
+
+    let mut str = String::from("cool");
+    call_another(&mut str);
+    println!("{}", str)
+}
+
+fn call_another(s: &mut String) {
+    s.push_str("hey");
 }
